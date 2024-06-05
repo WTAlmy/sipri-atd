@@ -1,0 +1,5 @@
+/venv
+/lib
+/data
+.DS_Store
+graph.html
