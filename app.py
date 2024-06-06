@@ -207,6 +207,7 @@ st.write(
     unsafe_allow_html=True,
 )
 
+# Bar graph of total value ordered by year
 yearly_totals = each_filter_df.groupby(year_filter_df["Year of order"])[
     "SIPRI TIV of delivered weapons"
 ].sum()
@@ -231,7 +232,6 @@ with col1:
     rec_supplier_totals_combined = pd.concat(
         [top_rec_suppliers, pd.Series(other_rec_suppliers, index=["Other"])]
     )
-
     fig = px.pie(
         rec_supplier_totals_combined,
         values=rec_supplier_totals_combined,
@@ -252,7 +252,6 @@ with col2:
     sup_recipient_totals_combined = pd.concat(
         [top_sup_recipients, pd.Series(other_sup_recipients, index=["Other"])]
     )
-
     fig = px.pie(
         sup_recipient_totals_combined,
         values=sup_recipient_totals_combined,
@@ -262,6 +261,7 @@ with col2:
     st.plotly_chart(fig)
 
 
+# Cache generated graph based on filtered dataframe
 @st.cache_data
 def build_graph(each_filter_df):
     G = nx.DiGraph()
@@ -285,6 +285,7 @@ def build_graph(each_filter_df):
     return net
 
 
+# Graph
 net = build_graph(each_filter_df)
 with tempfile.NamedTemporaryFile(delete=False, suffix=".html") as tmp_file:
     net.save_graph(tmp_file.name)
