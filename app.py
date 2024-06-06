@@ -1,12 +1,10 @@
 import math
 import tempfile
-from io import StringIO
 
 import geopandas as gpd
 import networkx as nx
 import pandas as pd
 import plotly.express as px
-import plotly.graph_objects as go
 import streamlit as st
 import streamlit.components.v1 as components
 from pyvis.network import Network
@@ -59,7 +57,7 @@ original_df.columns = original_df.columns.map(lambda x: x.strip())
 # Validate valid APAC countries
 unique_recipients = original_df["Recipient"].unique()
 for country in APAC_COUNTRIES:
-    if not country in unique_recipients:
+    if country not in unique_recipients:
         print(country)
         raise AssertionError()
 
@@ -238,7 +236,7 @@ with col1:
         rec_supplier_totals_combined,
         values=rec_supplier_totals_combined,
         names=rec_supplier_totals_combined.index,
-        title=f"Weapons Value Breakdown by Supplier",
+        title="Weapons Value Breakdown by Supplier",
     )
     st.plotly_chart(fig)
 
@@ -259,7 +257,7 @@ with col2:
         sup_recipient_totals_combined,
         values=sup_recipient_totals_combined,
         names=sup_recipient_totals_combined.index,
-        title=f"Weapons Value Breakdown by Recipient",
+        title="Weapons Value Breakdown by Recipient",
     )
     st.plotly_chart(fig)
 
