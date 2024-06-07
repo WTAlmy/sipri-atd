@@ -50,7 +50,7 @@ APAC_COUNTRIES = [
 ]
 
 # Load
-original_df = pd.read_csv("data/sipri-full-rows.csv")
+original_df = pd.read_csv("static/sipri-full-rows.csv")
 original_df.reset_index(inplace=True)
 original_df.columns = original_df.columns.map(lambda x: x.strip())
 
